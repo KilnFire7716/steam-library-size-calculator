@@ -1,29 +1,28 @@
 # Steam Library Size Calculator
 
-A zero-dependency Python tool that calculates the exact total storage space required to install your entire Steam library (including Steam Family Sharing games).
+Python tool that calculates the exact total storage space required to install your entire Steam library (including Steam Family Sharing games). It does this through the Steam appinfo.vdf cache locally on your device. You can **optionally utilize your Steam API key and account ID to act as an audit check against your local appinfo.vdf cache in the instance it isn't complete. Testing against my own library worked fine with no API key and is more private so that is my default recommendation to get a quick idea.
 
 ### Why Does This Exist?
-When you select all games in your Steam client and click **Install**, Steam immediately blocks the dialog with a `"Not enough free disk space"` error if the combined size exceeds your physical drive's free space—refusing to show you the total storage required. Furthermore, web-based calculators rely on outdated text strings from Steam Store system requirement pages rather than live depot manifests, typically underreporting library sizes by 15–25%.
+When you select all games in your Steam client and click **Install**, Steam immediately blocks the dialog with a `"Not enough free disk space"` error if the combined size exceeds your physical drive's free space—refusing to show you the total storage required.
 
-This script parses Steam's local binary depot cache (`appinfo.vdf`) directly using Python's built-in standard library (`struct`), giving you an accurate byte-for-byte calculation across **Windows**, **macOS**, and **Linux / SteamOS**.
+This script parses Steam's local binary depot cache (`appinfo.vdf`) directly using Python's built-in standard library (`struct`), giving you a calculation across **Windows**, **macOS**, and **Linux / SteamOS**.
 
 ---
 
 ## Features
-* **Zero External Dependencies:** Uses only built-in Python 3 modules (`os`, `struct`, `json`, `urllib`, `winreg`). No `pip install` or virtual environments needed.
+* **Zero External Dependencies:** Uses only built-in Python 3 modules (`os`, `struct`, `json`, `urllib`, `winreg`).
 * **Cross-Platform Auto-Detection:** Automatically locates your `Steam/appcache/appinfo.vdf` file on Windows (via Registry & standard paths), macOS, and Linux/SteamOS (Native, Flatpak, and Snap).
 * **Supports Binary VDF v27, v28, and v29+:** Includes a built-in binary parser with string table support for Valve's latest `appinfo.vdf` format.
 * **Largest Games Breakdown:** Lists the top 10 largest games in your library by default.
 
 ---
 
-## Step 1: Prime Your Steam Client Cache (Important!)
-By default, Steam only caches depot metadata in `appinfo.vdf` for games your client has interacted with. To make sure **100% of your owned and Family Shared games** are cached before running the script:
+## Step 1: Steam Client Local Cache Setup (Important!)
+By default, Steam only caches depot metadata in `appinfo.vdf` for games your Steam client application has interacted with. To make sure **100% of your owned and Family Shared games** are cached before running the script:
 
 1. Open the **Steam** desktop client and go to your **Library**.
-2. Make sure **Games** (and **Include games from Family Library**, if desired) is enabled in the top left filter dropdown.
-3. Click the very first game in your list, scroll to the bottom, hold **Shift**, and click the very last game so your entire library is highlighted.
-4. Wait **10–15 seconds**. Simply highlighting all games forces Steam's background client worker to download and write all depot manifests into `appinfo.vdf`.
+2. Click the very first game in your list, scroll to the bottom of your library, hold **Shift**, and then click the very last game so your entire library is highlighted. Right-click and click "Install selected".
+3. Wait **10–15 seconds**.
 
 ---
 

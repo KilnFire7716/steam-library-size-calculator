@@ -33,7 +33,7 @@ By default, Steam only caches depot metadata in `appinfo.vdf` for games your Ste
 2. Open **PowerShell** or **Command Prompt** in the folder containing `steam_library_size.py`.
 3. Run:
    ```powershell
-   python steam_library_size.py
+   python steam_library_size_calculator.py
    ```
    *(Note: The script automatically checks the Windows Registry `HKCU\Software\Valve\Steam` to find your Steam folder, even if Steam is installed on a secondary drive like `D:\Steam`).*
 
@@ -41,7 +41,7 @@ By default, Steam only caches depot metadata in `appinfo.vdf` for games your Ste
 1. Open **Terminal** in the folder containing `steam_library_size.py`.
 2. Run:
    ```bash
-   python3 steam_library_size.py
+   python3 steam_library_size_calculator.py
    ```
    *(Looks in `~/Library/Application Support/Steam/appcache/appinfo.vdf` by default).*
 
@@ -49,7 +49,7 @@ By default, Steam only caches depot metadata in `appinfo.vdf` for games your Ste
 1. Open your terminal (**Konsole** in Desktop Mode on Steam Deck).
 2. Run:
    ```bash
-   python3 steam_library_size.py
+   python3 steam_library_size_calculator.py
    ```
    *(Automatically checks `~/.steam/steam`, `~/.local/share/Steam`, Flatpak `~/.var/app/com.valvesoftware.Steam/...`, and Snap directories).*
 

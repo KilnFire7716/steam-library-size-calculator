@@ -1,6 +1,8 @@
 # Steam Library Size Calculator
 
-Python tool that calculates the total storage space required to install your entire Steam library (including Steam Family Sharing games). It does this through the Steam `appinfo.vdf` cache locally on your device. You can **optionally** utilize your Steam API key and account ID to act as an audit check against your local `appinfo.vdf` cache in the instance it isn't complete. Testing against my own library worked fine with no API key and is more private so that is my default recommendation to get a quick idea. As this is all local by default, it does not require your Steam library to be set to "Public" to read and can be run offline (after you complete the initial Step 1 to fill up the cache with the necessary information).
+Python tool that calculates the total storage space required to install your entire Steam library (including Steam Family Sharing games). It does this through the Steam `appinfo.vdf` cache locally on your device. You can **optionally** utilize your Steam API key and account ID to act as an audit check against your local `appinfo.vdf` cache in the instance it isn't complete. Testing against my own library worked fine with no API key and is more private so that is my default recommendation to get a quick idea.
+
+As this is all local by default, it does not require your Steam library to be set to "Public" to read and can be run offline (after you complete the initial Step 1 to fill up the cache with the necessary information).
 
 ### Why Does This Exist?
 When you select all games in your Steam client and click **Install**, Steam immediately blocks the dialog with a `"Not enough free disk space"` error if the combined size exceeds your physical drive's free space—refusing to show you the total storage required. I was curious on how much space I would need to download my entire Steam library onto my NAS for fun.
@@ -29,7 +31,7 @@ By default, Steam only caches depot metadata in `appinfo.vdf` for games your Ste
 ## Step 2: How to Run the Script on Each OS
 
 ### Windows
-1. Ensure [Python 3](https://www.python.org/downloads/windows/) is installed.
+1. Ensure [Python 3](https://www.python.org/downloads/windows/) is installed to PATH on your device.
 2. Open **PowerShell** or **Command Prompt** in the folder containing `steam_library_size.py`.
 3. Run:
    ```powershell

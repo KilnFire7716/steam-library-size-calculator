@@ -64,36 +64,3 @@ By default, Steam only caches depot metadata in `appinfo.vdf` for games your cli
 | `--steam-path` | Manually specify a custom Steam installation directory. | `python3 steam_library_size.py --steam-path "E:\Steam"` |
 | `--api-key` | Optional Steam Web API Key from [steamcommunity.com/dev/apikey](https://steamcommunity.com/dev/apikey). | `python3 steam_library_size.py --api-key YOUR_KEY --steam-id YOUR_ID` |
 | `--steam-id` | Your 17-digit `SteamID64` (used alongside `--api-key`). | See above |
-
----
-
-## Alternative Method: The 64 TB Virtual Drive Trick (No Script Needed)
-If you want the Steam client GUI itself to calculate the combined installation total, you can mount a thin-provisioned **64 TB virtual drive** that uses almost zero real disk space (~20–150 MB) and add it as a Steam Storage folder:
-
-### On Windows (VHDX)
-1. Right-click the **Start** button and open **Disk Management**.
-2. Click **Action** -> **Create VHD**.
-3. Save it anywhere as `SteamCheck.vhdx`, set size to **64 TB**, select **VHDX**, and select **Dynamically expanding**.
-4. Right-click the new disk in the bottom pane -> **Initialize Disk** (GPT), then right-click the unallocated space -> **New Simple Volume** (Quick Format NTFS as drive `Z:`).
-5. In Steam, go to **Steam** -> **Settings** -> **Storage** -> **Add Drive** (`Z:`), select all games in your library, click **Install**, and select `Z:` to see the exact space required. Cancel the install, detach the VHD in Disk Management, and delete the `.vhdx` file.
-
-### On macOS (APFS Sparsebundle)
-1. Run this in **Terminal** to create and mount a 64 TB sparse disk image:
-   ```bash
-   hdiutil create -size 64t -type SPARSEBUNDLE -fs APFS -volname "SteamCheck" ~/Desktop/SteamCheck.sparsebundle
-   open ~/Desktop/SteamCheck.sparsebundle
-   ```
-2. Add `/Volumes/SteamCheck` under **Steam** -> **Settings** -> **Storage**, select all games, and click **Install** to view the total. Eject and delete `SteamCheck.sparsebundle` when done.
-
-### On Linux / SteamOS (Sparse Loopback Image)
-1. Create and mount a 64 TB sparse ext4 file in your terminal:
-   ```bash
-   truncate -s 64T /tmp/steam_check.img
-   mkfs.ext4 -F -O sparse_super2 /tmp/steam_check.img
-   mkdir -p /tmp/steam_mount
-   sudo mount -o loop /tmp/steam_check.img /tmp/steam_mount
-   ```
-2. Add `/tmp/steam_mount` in Steam Storage Settings to check your total, then clean up:
-   ```bash
-   sudo umount /tmp/steam_mount && rm -rf /tmp/steam_check.img /tmp/steam_mount
-   ```

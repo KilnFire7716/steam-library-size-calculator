@@ -1,6 +1,6 @@
 # Steam Library Size Calculator
 
-Python tool that calculates the exact total storage space required to install your entire Steam library (including Steam Family Sharing games). It does this through the Steam appinfo.vdf cache locally on your device. You can **optionally utilize your Steam API key and account ID to act as an audit check against your local appinfo.vdf cache in the instance it isn't complete. Testing against my own library worked fine with no API key and is more private so that is my default recommendation to get a quick idea.
+Python tool that calculates the exact total storage space required to install your entire Steam library (including Steam Family Sharing games). It does this through the Steam `appinfo.vdf` cache locally on your device. You can **optionally utilize your Steam API key and account ID to act as an audit check against your local `appinfo.vdf` cache in the instance it isn't complete. Testing against my own library worked fine with no API key and is more private so that is my default recommendation to get a quick idea.
 
 ### Why Does This Exist?
 When you select all games in your Steam client and click **Install**, Steam immediately blocks the dialog with a `"Not enough free disk space"` error if the combined size exceeds your physical drive's free space—refusing to show you the total storage required.
